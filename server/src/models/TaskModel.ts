@@ -1,7 +1,12 @@
 export interface TaskModel {
   id: number;
-  group: string;
+  groupId: number;
   task: string;
   dependencyIds: number[];
   completedAt: string | null; 
+}
+
+export interface TaskGroupModel {
+  id: number;
+  name: string;
 }

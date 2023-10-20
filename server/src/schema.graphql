@@ -1,21 +1,36 @@
 type Task {
   id: Int!
-  group: String!
+  groupId: Int!
   task: String!
   dependencyIds: [Int]!
   completedAt: String
 }
 
+type TaskGroup {
+  id: Int!
+  name: String!
+}
+
+type TaskGroupDetail {
+  id: Int!
+  name: String!
+  tasks: [Task!]!
+  completeCount: Int!
+  incompleteCount: Int!
+}
+
 input ToggleTaskInput {
   taskId: Int!
-  completedAt: String
+  completed: Boolean!
 }
 
 # GQL Queries and Mutations
 type Query {
+  taskGroup(groupId: Int!): TaskGroupDetail!
   tasks: [Task!]!
+  taskGroups: [TaskGroup!]!
 }
 
 type Mutation {
-  toggleTask(toggleTaskInput: ToggleTaskInput!): Boolean!
+  toggleTask(toggleTaskInput: ToggleTaskInput!): Task
 }
